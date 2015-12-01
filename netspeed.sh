@@ -1,5 +1,9 @@
 #!/bin/ash                                                                                                                              
-                                                                                                                                        
+        
+#Récupére les TX + RX de l'interface spécifié, calcule la bande passante / seconde puis la poste vers influxDB
+#Fait ces opérations toutes les secondes, 59 fois...et est dans la crontab pour execution toutes les minutes
+
+
 INTERVAL="1"  # update interval in seconds                                                                                              
                                                                                                                                         
 if [ -z "$1" ]; then                                                                                                                    
