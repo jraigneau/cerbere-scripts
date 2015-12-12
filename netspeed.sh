@@ -26,9 +26,9 @@ do
         [ -f /sys/class/net/$1/statistics/tx_bytes ] && T2=`cat /sys/class/net/$1/statistics/tx_bytes` || T2=0                          
         TBPS=`expr $T2 - $T1`                                                                                                           
         RBPS=`expr $R2 - $R1`                                                                                                           
-        echo "c: $T1 $R1 $T2 $R2"                                                                                                       
+        #echo "c: $T1 $R1 $T2 $R2"                                                                                                       
         if [ $T1 -gt 0 ] && [ $T2 -gt 0 ]  && [ $R1 -gt 0 ] && [ $R2 -gt 0 ]; then                                                      
-                curl -i -XPOST 'http://obelix:8086/write?db=traffic' --data-binary "traffic,interface=$1 rx=$RBPS,tx=$TBPS"             
+                curl --silent -i -XPOST 'http://obelix:8086/write?db=traffic' --data-binary "traffic,interface=$1 rx=$RBPS,tx=$TBPS" > /dev/null            
         fi                                                                                                                              
         i=$(( $i + 1 ))                                                                                                                 
-dones
+done
